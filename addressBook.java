@@ -1,5 +1,5 @@
 import java.util.*;
-class contactPerson {
+class contactPersonNew {
     private int id;
    private String firstName;
    private String lastName;
@@ -9,7 +9,7 @@ class contactPerson {
    private String zip;
    private String phoneNumber;
 
-   public contactPerson(String firstName,String lastName,String address,String city,String state,
+   public contactPersonNew(String firstName,String lastName,String address,String city,String state,
                             String zip,String phoneNumber,int id){
         this.id = id;
         this.firstName = firstName;
@@ -21,7 +21,7 @@ class contactPerson {
         this.phoneNumber = phoneNumber;
    }
    
-   contactPerson()
+   contactPersonNew()
    {
        //pass
    }
@@ -53,7 +53,26 @@ class contactPerson {
         arr[6] = zip;
         return arr;
    }
+
+   public String getFirstName()
+   {
+        return this.firstName;
+   }
+   public String userToBeEdited()
+   {
+    System.out.println("enter the username you want to edit");
+    Scanner uname = new Scanner(System.in);
+    String name = uname.nextLine();
+    return name;
+   }
    
+   public void removeElement(contactPersonNew[] array , int index)
+   {
+    for (int i = index; i < array.length - 1; i++) {
+        array[i] = array[i + 1];
+    }
+   }
+
    public void display()
    {
         System.out.println("Id: "+this.id);
@@ -75,8 +94,8 @@ class contactPerson {
         Scanner num = new Scanner(System.in);
         int n = num.nextInt();
         int comp = (int)n;
-        contactPerson Storage[] = new contactPerson[n];
-        contactPerson ob = new contactPerson();
+        contactPersonNew Storage[] = new contactPersonNew[n];
+        contactPersonNew ob = new contactPersonNew();
         for(int i = 0;i<Storage.length;i++)
         {   
             String res[] = ob.userInput();
@@ -88,7 +107,7 @@ class contactPerson {
                     String zip = res[5];
                     String phoneNumber = res[6];
                     int uid = i;
-                    Storage[i] = new contactPerson(firstName, lastName, address, city, state, zip, phoneNumber, uid);
+                    Storage[i] = new contactPersonNew(firstName, lastName, address, city, state, zip, phoneNumber, uid);
                     System.out.println(" ");
                     if(comp > 1)
                     {
@@ -97,12 +116,34 @@ class contactPerson {
                         
                     
         }
+        String get = ob.userToBeEdited();
         for(int i = 0; i<Storage.length; i++) 
         {
-            Storage[i].display();
-            System.out.println(" ");
+            if( Storage[i].getFirstName().equals(get))
+            {
+                String res[] = ob.userInput();
+                    String firstName = res[0];
+                    String lastName = res[1];
+                    String address = res[2];
+                    String city = res[3];
+                    String state = res[4];
+                    String zip = res[5];
+                    String phoneNumber = res[6];
+                    int uid = i;
+                    Storage[i] = new contactPersonNew(firstName, lastName, address, city, state, zip, phoneNumber, uid);
+                    System.out.println(" ");
+            } 
+            // Storage[i].display();
+            // System.out.println(" ");
         }
         
+        for(int i = 0; i<Storage.length; i++) 
+        {
+            if( Storage[i].getFirstName().equals(get))
+            {
+                ob.removeElement(Storage,i);
+            }
+        }
 }
 }
 
